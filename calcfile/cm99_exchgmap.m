@@ -1,27 +1,27 @@
-% ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“—p‚Ìƒ}ƒbƒvŒ`®‚É•ÏŠ·‚·‚é
+% ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ç”¨ã®ãƒãƒƒãƒ—å½¢å¼ã«å¤‰æ›ã™ã‚‹
 
-%% IG-ON`OFF‚Ü‚Å‚Ì‘–s‹——£
+%% IG-ONï½OFFã¾ã§ã®èµ°è¡Œè·é›¢
     [map_mileage_all_x map_mileage_all_y] = func_map2simmap(map_mileage_all(:,2),map_mileage_all(:,1));
 
-%% ˆêR‚Ì‘–s‹——£
+%% ä¸€å±±ã®èµ°è¡Œè·é›¢
     [map_mileage_yama_x map_mileage_yama_y] = func_map2simmap(map_mileage_yama(:,2),map_mileage_yama(:,1));
 
-%% Ô‘¬
+%% è»Šé€Ÿ
     [map_vspe_x map_vspe_y] = func_map2simmap(map_vspe(:,2),map_vspe(:,1));
 
-%% ’âÔŠÔ
+%% åœè»Šæ™‚é–“
     [map_stptime_x map_stptime_y] = func_map2simmap(map_stptime(:,2),map_stptime(:,1));
 
-%% ‰Á‘¬‘–s‚ÌŒp‘±ŠÔ
+%% åŠ é€Ÿèµ°è¡Œã®ç¶™ç¶šæ™‚é–“
     [map_acctime_x map_acctime_y] = func_map2simmap(map_acctime(:,2),map_acctime(:,1));
 
-%% ’èí‘–s‚ÌŒp‘±ŠÔ
+%% å®šå¸¸èµ°è¡Œã®ç¶™ç¶šæ™‚é–“
     [map_statime_x map_statime_y] = func_map2simmap(map_statime(:,2),map_statime(:,1));
 
-%% Œ¸‘¬‘–s‚ÌŒp‘±ŠÔ
+%% æ¸›é€Ÿèµ°è¡Œã®ç¶™ç¶šæ™‚é–“
     [map_dectime_x map_dectime_y] = func_map2simmap(map_dectime(:,2),map_dectime(:,1));    
     
-%% ‰Á‘¬‚Ì‰Á‘¬“x
+%% åŠ é€Ÿæ™‚ã®åŠ é€Ÿåº¦
     [map_accvalue_x1  map_accvalue_y1] = func_map2simmap(map_dvsp_acc(:,1),map_dvsp1(110:201,1));
     [map_accvalue_x2  map_accvalue_y2] = func_map2simmap(map_dvsp_acc(:,2),map_dvsp1(110:201,1));
     [map_accvalue_x3  map_accvalue_y3] = func_map2simmap(map_dvsp_acc(:,3),map_dvsp1(110:201,1));
@@ -43,7 +43,7 @@
     [map_accvalue_x19 map_accvalue_y19] = func_map2simmap(map_dvsp_acc(:,19),map_dvsp1(110:201,1));
     [map_accvalue_x20 map_accvalue_y20] = func_map2simmap(map_dvsp_acc(:,20),map_dvsp1(110:201,1));
  
-%% ’èí‚Ì‰Á‘¬“x
+%% å®šå¸¸æ™‚ã®åŠ é€Ÿåº¦
     [map_stavalue_x1  map_stavalue_y1] = func_map2simmap(map_dvsp_sta(:,1),map_dvsp1(93:109,1));
     [map_stavalue_x2  map_stavalue_y2] = func_map2simmap(map_dvsp_sta(:,2),map_dvsp1(93:109,1));
     [map_stavalue_x3  map_stavalue_y3] = func_map2simmap(map_dvsp_sta(:,3),map_dvsp1(93:109,1));
@@ -65,7 +65,7 @@
     [map_stavalue_x19 map_stavalue_y19] = func_map2simmap(map_dvsp_sta(:,19),map_dvsp1(93:109,1));
     [map_stavalue_x20 map_stavalue_y20] = func_map2simmap(map_dvsp_sta(:,20),map_dvsp1(93:109,1));
 
-%% Œ¸‘¬‚Ì‰Á‘¬“xiŒ¸‘¬“xj
+%% æ¸›é€Ÿæ™‚ã®åŠ é€Ÿåº¦ï¼ˆæ¸›é€Ÿåº¦ï¼‰
     [map_decvalue_x1  map_decvalue_y1] = func_map2simmap(flipud(map_dvsp_dec(:,1)),flipud(map_dvsp1(1:92,1)));
     [map_decvalue_x2  map_decvalue_y2] = func_map2simmap(flipud(map_dvsp_dec(:,2)),flipud(map_dvsp1(1:92,1)));
     [map_decvalue_x3  map_decvalue_y3] = func_map2simmap(flipud(map_dvsp_dec(:,3)),flipud(map_dvsp1(1:92,1)));
