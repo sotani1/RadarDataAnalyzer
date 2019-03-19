@@ -1,5 +1,5 @@
 function [out] = mapcalc2(input_signal,mapdata)
-    %â€°Ãâ€˜Â¬â€œxâ€°â€°Å½Zâ€”p
+    %‰Á‘¬“x‰‰Z—p
 
     map_x_min = min(mapdata(:,1));
     map_x_max = max(mapdata(:,1));

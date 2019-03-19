@@ -5,7 +5,7 @@ out_acctime=[];
 out_statime=[];
 out_dectime=[];
 
-%% Partition segments into ACC/CRU/DEC (Assume Â}1.5km/h=0.4m/s^2Âj
+%% Partition segments into ACC/CRU/DEC (Assume }1.5km/h=0.4m/s^2j
 acc_num=[];
 sta_num=[];
 dec_num=[];

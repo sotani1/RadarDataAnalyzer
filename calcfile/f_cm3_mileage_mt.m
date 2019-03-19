@@ -3,7 +3,7 @@ function out_mileage_mt = f_cm3_mileage_mt(vsp, dt)
 
 %% Initializing parameters
     out_mileage_mt = []; % Distance travelled per microtrip
-    vsp_state      = []; % Speed state (0:Idle, 1:TransitÂj
+    vsp_state      = []; % Speed state (0:Idle, 1:Transitj
     num_mt         =  1; % Number of micro trips
     vstate_rising  = []; % Upward slope edge
     vstate_falling = []; % Downward slope edge
