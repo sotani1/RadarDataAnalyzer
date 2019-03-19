@@ -19,7 +19,7 @@ M_var_time        = [];
 flg_time_interp   = 0;                                     % Time interpolation flag (please set to zero always) 
 flg_mtn           = 0;                                     % Calcmountain execution flag
 flg_app           = 0;                                     % GUI execution flag
-flg_analysis_mode = 1;                                     % CANape(1), DDRS(2), SHRP2(3), MEISTER(4), VBOX(5);
+flg_analysis_mode = 3;                                     % CANape(1), DDRS(2), SHRP2(3), MEISTER(4);
 
 if flg_analysis_mode == 1
     sz = 100;
@@ -117,17 +117,20 @@ for k = 1+2:length(D)
         end
       end
 
-    %  f_writelog(M_data, Logfolder, Prgfolder, var_time, i_mt, M_var_time{i_mt}(end), M_var_time{i_mt}(1), var_time(2)-var_time(1), sz, M_var_time);  
-    %end
-
+    %% Calculate all risk feelings
+    %run_makelog_r1;
+    
     as_ = transpose(as_);
     cd(Opefolder);
-
+    
     %% Begin sequence for calcfile
-     run_makemap_r1;
+     %run_makemap_r1;
+    
+    %% Begin gobo sequence
+    run_makegobo;
     
     %% Clear all old variables
-     cm100_clear
+     %cm100_clear
 
 end
 
