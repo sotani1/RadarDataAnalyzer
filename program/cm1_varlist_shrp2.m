@@ -25,6 +25,9 @@ as_{4}  = 'NA';                                           %   4      % *********
 as_{5}  = 'vtti.pedal_gas_position';                      %   5      % APO
 as_{6}  = 'vtti.pedal_brake_state';                       %   6      % Brake state
 as_{7}  = 'vtti.steering_wheel_position';                 %   7      % Steering wheel angle
+as_{8}  = 'vtti.latitude';                                %   8      % Latitude
+as_{9}  = 'vtti.longitude';                               %   9      % Longitude
+as_{10} = 'vtti.lane_distance_off_center';                %   10     % Distance off center
 asn_org = length(as_);
 %============== The rest of the variables can be in any arbitrary order ==============
 

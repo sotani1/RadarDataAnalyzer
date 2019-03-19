@@ -17,8 +17,8 @@ i_mt_plot = 1;
 i_tk_plot = 1;
 time_lwr = M_var_time{i_mt_plot}(1);
 time_upr = M_var_time{i_mt_plot}(end);
-time_lwr = 200;
-time_upr = 220;
+%time_lwr = 185;
+%time_upr = 200;
 
 %Check to see if lead car is stopped
 f_type = 'var'; f_target = 'lead'; f_var = 'speedx'; f_ilv = 'ilv' ;
@@ -200,8 +200,8 @@ try
     f3Dscatter(plotvar_1, plotvar_2, ...
                plotvar_3, 5, plotvar_4, subplot6, ...
                time_lwr, time_upr,'scatter');
-    xlim([0 2]);
-    ylim([-0.5 2]);
+    xlim([0 1]);
+    ylim([0 0.7]);
     title(strcat('M',num2str(i_mt_plot), '_Track', num2str(i_tk_plot),'_TTC_INV vs THW_INV'), 'interpreter', 'none');
     hold on
     f_RF_constcalc(subplot6,time_upr);

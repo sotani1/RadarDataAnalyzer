@@ -126,6 +126,20 @@ if flg_analysis_mode == 2 || flg_analysis_mode == 3 || flg_analysis_mode == 4
     catch
         var_ego_swa         = [];
     end
+    try
+        var_latitude        = var_{ff_varname(as_, as_{8})};
+        var_latitude        = fset_removenan(var_latitude, var_time);
+    catch
+        var_latitude        = [];
+    end
+    try
+        var_longitude       = var_{ff_varname(as_, as_{9})};
+        var_longitude       = fset_removenan(var_longitude, var_time);
+    catch
+        var_longitude       = [];
+    end
+    
+    
 end
 
 var_ego_vel_interp      = fset_removenan(var_ego_vel, var_time);                            % ego vehicle speed with nan removed and interpolated
@@ -205,6 +219,25 @@ for i_mt = 1:num_mt
     catch
         M_data(i_mt).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data = [];
     end
+    %Latitude
+    f_type = 'var'; f_target = 'ego';    f_var = 'latitude'; f_ilv = 'non_ilv' ;
+    [ind_ftype, ind_ftarget, ind_fvar, ind_filv] = fset_mindx(f_type, f_target, f_var, f_ilv, M_data);
+    try
+        M_data(i_mt).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data = var_latitude(int32(M_start):int32(M_end));     
+    catch
+        M_data(i_mt).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data = [];
+    end
+    %Longitude
+    f_type = 'var'; f_target = 'ego';    f_var = 'longitude'; f_ilv = 'non_ilv' ;
+    [ind_ftype, ind_ftarget, ind_fvar, ind_filv] = fset_mindx(f_type, f_target, f_var, f_ilv, M_data);
+    try
+        M_data(i_mt).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data = var_longitude(int32(M_start):int32(M_end));     
+    catch
+        M_data(i_mt).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data = [];
+    end    
+    
+    
+    
 %% ˜2_2.1.5  Set radar variable list (Please refer to cm1_varlist ˜1.1  to establish the column index)
     for i_tc=1:track_count
         asn_ctr = asn_org + length(i_asn)*(i_tc-1);

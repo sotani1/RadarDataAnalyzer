@@ -33,11 +33,12 @@ nans                    = isnan(var_ego_vel_nan);                               
 var_ego_vel_nan(nans)   = interp1(var_time(~nans), var_ego_vel_nan(~nans), var_time(nans)); % ego vehicle speed without nans (final)
 var_ego_accelx          = getfield(var_,as_{3})./9.8062;                                    % ego vehicle acceleration_x [G]
 var_ego_jerkx(1,1)      = NaN;                                                              % dummy declaration
-var_ego_jerkx           = vertcat(var_ego_jerkx,diff(var_ego_accelx));                      % ego vhiecle jerk
+var_ego_jerkx           = vertcat(var_ego_jerkx, diff(var_ego_accelx));                      % ego vhiecle jerk
 var_ego_dist            = cumtrapz(var_time, var_ego_vel_interp./3.6);                      % ego vehicle distance travelled 
 var_ego_dist_brake      = var_ego_dist;                                                     % dummy set up
 var_ego_dist_brake(var_ego_accelx>=-0.01 & var_ego_vel_nan>=0.5)=NaN;                       % ego vehicle distance travelled during braking
 var_ego_apo             = getfield(var_,as_{8});                                            % ego apo
+var_ego_bksw            = getfield(var_,as_{7});                                            % brake switch 
 
 try
     var_env_curvature   = getfield(var_,as_{9});                                            % Curvature
@@ -86,7 +87,10 @@ for i_mt = 1:num_mt
     f_type = 'var'; f_target = 'ego';    f_var = 'apo'; f_ilv = 'non_ilv' ;
     [ind_ftype, ind_ftarget, ind_fvar, ind_filv] = fset_mindx(f_type, f_target, f_var, f_ilv, M_data);
     M_data(i_mt).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data = var_ego_apo(M_start:M_end);
-    
+    %Ego bksw
+    f_type = 'var'; f_target = 'ego';    f_var = 'bksw'; f_ilv = 'non_ilv' ;
+    [ind_ftype, ind_ftarget, ind_fvar, ind_filv] = fset_mindx(f_type, f_target, f_var, f_ilv, M_data);
+    M_data(i_mt).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data = var_ego_bksw(M_start:M_end);
     %====Env====
     %Curve
     f_type = 'var'; f_target = 'env';    f_var = 'curve'; f_ilv = 'non_ilv' ;
