@@ -1,7 +1,0 @@
-clear as_ as_save asn asn_ctr asn_org col_val dt dvsp i_asn i_asn_ilv i_lim i_mt imdata k M_data M_time_tot
-clear M_var_time M_var_time_ILV_all M_var_trackN_all M_var_trackN_all_ones M_var_trackN_ILV map_plot mt_end
-clear mt_end_temp mt_start mt_start_temp nans num_mt num_mt_temp S_Map size_check_d size_check_imdata
-clear trackN_ILV_tmp V_var_time var_ var_ego_accelx var_ego_apo var_ego_bksw var_ego_dist var_ego_dist_brake
-clear var_ego_jerkx var_ego_swa var_ego_vel var_ego_vel_interp var_ego_vel_nan var_time var_trackN_accx
-clear var_trackN_ILV var_trackN_thw_delta var_trackN_thw_delta_inv var_trackN_ttc var_trackN_ttc_delta 
-clear var_trackN_ttc_delta_inv var_trackN_ttc_inv
