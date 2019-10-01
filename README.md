@@ -27,5 +27,5 @@ This script features four main modules under the master script "cm0_radar_data_a
    dfolder_gobo, dfolder_gobo_log, dfolder_map, dfolder_log
  
  # Disclaimer
- This tool is not intended for developmental use.  Use with provision.
+ This tool is not intended for developmental use.  Owner does not claim responsibility for any damages or loss. <br/>
  Copyright 2017, Edward Shinji Otani, All rights reserved.
