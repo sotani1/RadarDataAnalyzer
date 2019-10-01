@@ -5,12 +5,12 @@ This tool was featured in the Apri 2018 SHRP2 NDS webinar series "Insight Webina
 https://insight.shrp2nds.us   (User registration required)
 
 # How-to-use
-Just follow these simple steps:
-  Step 1) Place data to be analyzed in the "dfolder" directory.
-          *Note: You may place a csv file or a MAT file
-  Step 2) Define your parameters in "cm1_varlist" (for .MAT type) or "cm1_varlist_shrp2" (for .csv type)
-  Step 3) Run "cm0_radar_data_analyzer" script
-  Step 4) After data are stored in workspace, run "cm3_plotfig" script located under the "program_1" directory.
+Just follow these simple steps: <br/>
+  Step 1) Place data to be analyzed in the "dfolder" directory. <br/>
+          *Note: You may place a csv file or a MAT file <br/>
+  Step 2) Define your parameters in "cm1_varlist" (for .MAT type) or "cm1_varlist_shrp2" (for .csv type <br/>
+  Step 3) Run "cm0_radar_data_analyzer" script <br/>
+  Step 4) After data are stored in workspace, run "cm3_plotfig" script located under the "program_1" directory. <br/>
 
 # Description of main script (program_1)
 This script is designed to be an opensource script to ingest SHRP2 NDS data and other data custom data types (e.g. CANape).
