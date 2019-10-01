@@ -1,4 +1,6 @@
-# RadarDataAnalyzer Tool    2019/4/27
+# RadarDataAnalyzer Tool    2019/4/27  <br/>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Radar Data Analyzer Tool for SHRP2 NDS and other data sources.
 The primary function of this tool is to be able to read csv or MAT file data and plot ego vehicle and surrounding vehicle characteristics all in the same script.
 This tool was featured in the Apri 2018 SHRP2 NDS webinar series "Insight Webinar: Data Analysis Tool Development SHRP2 NDS".
