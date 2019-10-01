@@ -26,3 +26,6 @@ This script features four main modules under the master script "cm0_radar_data_a
  Post processed results and log files are exported to the following folders:
    dfolder_gobo, dfolder_gobo_log, dfolder_map, dfolder_log
  
+ # Disclaimer
+ This tool is not intended for developmental use.  Use with provision.
+ Copyright 2017, Edward Shinji Otani, All rights reserved.
