@@ -17,6 +17,11 @@ plotvar_bk_dist = 0; % brake distance variable
 figure('units','normalized','outerposition',[0 0 1 1])
 sz = 2;
 
+s_max  = 60; 
+s_min  = 0;
+dv_max = 20;
+dv_min = -20;
+
 % Plot for first microtrip
 i_mt_plot = 1;
 
@@ -24,8 +29,10 @@ i_mt_plot = 1;
 i_tk_plot = 1;
 time_lwr = M_var_time{i_mt_plot}(1);
 time_upr = M_var_time{i_mt_plot}(end);
-%time_lwr = 290;
-%time_upr = 310;
+%time_lwr = 1096;
+%time_upr = 1197;
+%time_lwr = var_time(arr_mtnup_ind(31));
+%time_upr = var_time(arr_mtndn_ind(32));
 
 %Check to see if lead car is stopped
 f_type = 'var'; f_target = 'lead'; f_var = 'speedx'; f_ilv = 'ilv' ;
@@ -79,17 +86,38 @@ f3Dscatter(plotvar_1, plotvar_2, ...
 %ylim([-0.5 0.1]);
 title(strcat('M',num2str(i_mt_plot),'_Ego_accelx vs VehicleSpeed'), 'interpreter', 'none');
 
-plotvar_1 = M_var_time{i_mt_plot};
-f_type = 'var'; f_target = strcat('ego',num2str(i_tk_plot)); f_var = 'jerkx'; f_ilv = 'non_ilv' ;
+% Jerk Plot (return to normal when done) 20190930
+%plotvar_1 = M_var_time{i_mt_plot};
+%f_type = 'var'; f_target = strcat('ego',num2str(i_tk_plot)); f_var = 'jerkx'; f_ilv = 'non_ilv' ;
+%[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+%plotvar_2 = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+%plotvar_3 = M_var_time{i_mt_plot};
+%plotvar_4 = M_var_time{i_mt_plot};
+%subplot3 = subplot(2,3,3);
+%f3Dscatter(plotvar_1, plotvar_2, ...
+%           plotvar_3, 5, plotvar_4, subplot3, ...
+%           time_lwr, time_upr,'plot3');
+%title(strcat('M',num2str(i_mt_plot),'_Ego_jerkx vs time'), 'interpreter', 'none');
+
+f_type = 'var'; f_target = strcat('ego',num2str(i_tk_plot)); f_var = 'speedx'; f_ilv = 'non_ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_1 = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+f_type = 'var'; f_target = 'lead'; f_var = 'speedx'; f_ilv = 'ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_1b = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+plotvar_1  = -(plotvar_1b - plotvar_1); % Wiedemann has the signs flipped
+f_type = 'var'; f_target = strcat('lead',num2str(i_tk_plot)); f_var = 'posx'; f_ilv = 'ilv' ;
 [ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
 plotvar_2 = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
-plotvar_3 = M_var_time{i_mt_plot};
-plotvar_4 = M_var_time{i_mt_plot};
-subplot3 = subplot(2,3,3);
+plotvar_3  = M_var_time{i_mt_plot};
+plotvar_4  = M_var_time{i_mt_plot};
+subplot2 = subplot(2,3,3);
 f3Dscatter(plotvar_1, plotvar_2, ...
-           plotvar_3, 5, plotvar_4, subplot3, ...
-           time_lwr, time_upr,'plot3');
-title(strcat('M',num2str(i_mt_plot),'_Ego_jerkx vs time'), 'interpreter', 'none');
+           plotvar_3, 5, plotvar_4, subplot2, ...
+           time_lwr, time_upr,'scatter');
+xlim([-20 20]);
+ylim([10 60]);
+title(strcat('M',num2str(i_mt_plot),'_Lead_distance vs Relative Speed'), 'interpreter', 'none');
 
 f_type = 'var'; f_target = strcat('ego',num2str(i_tk_plot)); f_var = 'speedx'; f_ilv = 'ilv' ;
 [ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
@@ -144,6 +172,85 @@ if isempty(plotvar_lead) ~= 1
     title(strcat('M',num2str(i_mt_plot), '_Track', num2str(i_tk_plot),'_TTC_INV vs THW_INV'), 'interpreter', 'none');
 end
 
+%% Second scatter plot here
+figure('units','normalized','outerposition',[0 0 1 1])
+subplot1a = subplot(1,3,1);
+f_type = 'var'; f_target = strcat('ego',num2str(i_tk_plot)); f_var = 'speedx'; f_ilv = 'non_ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_1 = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+f_type = 'var'; f_target = 'lead'; f_var = 'speedx'; f_ilv = 'ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_1b = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+plotvar_1  = -(plotvar_1b - plotvar_1); %Wiedemann has the signs flipped
+f_type = 'var'; f_target = strcat('lead',num2str(i_tk_plot)); f_var = 'posx'; f_ilv = 'ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_2 = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+plotvar_3  = M_var_time{i_mt_plot};
+plotvar_4  = M_var_time{i_mt_plot};
+f3Dscatter(plotvar_1, plotvar_2,     ...
+           plotvar_3, 5, plotvar_4,  ...
+           subplot1a, time_lwr,      ...
+           time_upr,'scatter');
+c1 = colormap(subplot1a, parula);
+c1 = colorbar;
+xlim([dv_min dv_max]);
+ylim([s_min s_max]);
+title(strcat('M',num2str(i_mt_plot),'_Lead_distance vs Relative Speed'), 'interpreter', 'none');
+
+%time_lwr1 = time_lwr - var_time(1);
+%time_upr1 = time_upr - var_time(1);
+time_lwr1 = ((time_lwr-var_time(1))/dt)+1;
+time_upr1 = ((time_upr-var_time(1))/dt)+1;
+
+subplot2a = subplot(1,3,2);
+f_type = 'var'; f_target = strcat('ego',num2str(i_tk_plot)); f_var = 'speedx'; f_ilv = 'non_ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_1 = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+f_type = 'var'; f_target = 'lead'; f_var = 'speedx'; f_ilv = 'ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_1b = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+plotvar_1  = -(plotvar_1b - plotvar_1); %Wiedemann has the signs flipped
+f_type = 'var'; f_target = strcat('lead',num2str(i_tk_plot)); f_var = 'posx'; f_ilv = 'ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_2 = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+f_type = 'var'; f_target = strcat('ego',num2str(i_tk_plot)); f_var = 'accelx'; f_ilv = 'non_ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_3 = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+scatter3(plotvar_1(int32(time_lwr1):int32(time_upr1)),...
+         plotvar_2(int32(time_lwr1):int32(time_upr1)),...
+         plotvar_3(int32(time_lwr1):int32(time_upr1)),...
+         5,...
+         plotvar_3(int32(time_lwr1):int32(time_upr1)));
+c2 = colormap(subplot2a, flipud(jet));
+c2 = colorbar;
+xlim([dv_min dv_max]);
+ylim([s_min s_max]);
+view(0, 90)
+title(strcat('M',num2str(i_mt_plot),'_Lead_distance vs Relative Speed vs Accel'), 'interpreter', 'none');
+
+subplot3a = subplot(1,3,3);
+f_type = 'var'; f_target = strcat('ego',num2str(i_tk_plot)); f_var = 'speedx'; f_ilv = 'non_ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_1 = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+f_type = 'var'; f_target = 'lead'; f_var = 'speedx'; f_ilv = 'ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_1b = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+plotvar_1  = -(plotvar_1b - plotvar_1); %Wiedemann has the signs flipped
+f_type = 'var'; f_target = strcat('lead',num2str(i_tk_plot)); f_var = 'posx'; f_ilv = 'ilv' ;
+[ind_ftype, ind_ftarget, ind_fvar, ind_filv] = ff_set_mindx(f_type, f_target, f_var, f_ilv, M_data);
+plotvar_2 = M_data(i_mt_plot).type(ind_ftype).target(ind_ftarget).variable(ind_fvar).ilv(ind_filv).data.data;
+plotvar_3  = plotvar_risk;
+scatter3(plotvar_1(int32(time_lwr1):int32(time_upr1)),...
+         plotvar_2(int32(time_lwr1):int32(time_upr1)),...
+         plotvar_3(int32(time_lwr1):int32(time_upr1)),...
+         5,...
+         plotvar_3(int32(time_lwr1):int32(time_upr1)));
+c3 = colormap(subplot3a, jet);
+c3 = colorbar;
+xlim([dv_min dv_max]);
+ylim([s_min s_max]);
+view(0, 90)
+title(strcat('M',num2str(i_mt_plot),'_Lead_distance vs Relative Speed vs RF'), 'interpreter', 'none');
 %% Time-series plot here
 
 plotvar_1b = [];
@@ -220,10 +327,10 @@ h_an = annotation('textbox','String',{char(strcat({'Bk Distance:  '},     {num2s
                                       char(strcat({'DistMin:   '   },     {num2str(round(nanmin(plotvar_temp(plotvar_temp>0)),2))})),                                           ...
                                       char(strcat({'DistMax:   '   },     {num2str(round(nanmax(plotvar_temp),2))})),                                                           ...
                                       char(strcat({'TimeTotal: '   },     {num2str(int32(time_upr-time_lwr))})),                                                                ...
-                                      char(strcat({'TimeMin:   '   },     {num2str(int32(time_lwr))})),                                                                         ...
-                                      char(strcat({'TimeMax:   '   },     {num2str(int32(time_upr))})),                                                                         ...
-                                      char(strcat({'Vid Start: '   },     {num2str(floor(time_lwr/60))} , {' m '} , num2str(round((time_lwr)-(floor(time_lwr/60)*60),0)), {' sec'})),    ...
-                                      char(strcat({'Vid End:   '   },     {num2str(floor(time_upr/60))} , {' m '} , num2str(round((time_upr)-(floor(time_upr/60)*60),0)), {' sec'}))     ...
+                                      char(strcat({'TimeMin:   '   },     {num2str(int32(time_lwr-var_time(1)))})),                                                                         ...
+                                      char(strcat({'TimeMax:   '   },     {num2str(int32(time_upr-var_time(1)))})),                                                                         ...
+                                      char(strcat({'Vid Start: '   },     {num2str(floor((time_lwr-var_time(1))/60))} , {' m '} , num2str(round(((time_lwr-var_time(1)))-(floor((time_lwr-var_time(1))/60)*60),0)), {' sec'})),    ...
+                                      char(strcat({'Vid End:   '   },     {num2str(floor((time_upr-var_time(1))/60))} , {' m '} , num2str(round(((time_upr-var_time(1)))-(floor((time_upr-var_time(1))/60)*60),0)), {' sec'}))     ...
                                       });
 var_plot(2,1) = round(nanmax(plotvar_temp)-nanmin(plotvar_temp(plotvar_temp>0)),2);
 var_plot(3,1) = int32(time_upr-time_lwr);
@@ -423,10 +530,11 @@ as_plot{14,1} = char('End');
 C = [as_plot num2cell(var_plot)];
 text(100,-10,strcat('M',num2str(i_mt_plot)));
 
-clear t h h1 b plotvar_1b_hist_tmp xlim_tmp sz pos k1 f1 i2;
-clear f_ilv f_target f_type f_var h_an i_asn i_asn_ilv i_mt ind_filv ind_ftype ind_fvar;
-clear plotvar_1 plotvar_1b plotvar_1b_hist plotvar_2 plotvar_2b plotvar_3 plotvar_4 plotvar_5;
-clear mt_end mt_start as_plot var_plot;
-clear plotvar_lead plotvar_lead_1b;
+clear t h h1 b plotvar_1b_hist_tmp xlim_tmp sz pos k1 f1 i2
+clear f_ilv f_target f_type f_var h_an i_asn i_asn_ilv i_mt ind_filv ind_ftype ind_fvar
+clear plotvar_1 plotvar_1b plotvar_1b_hist plotvar_2 plotvar_2b plotvar_3 plotvar_4 plotvar_5
+clear mt_end mt_start as_plot var_plot
+clear plotvar_lead plotvar_lead_1b
+clear time_upr time_lwr time_upr1 time_lwr1 c1 c2 c3 s_max s_min dv_max dv_min
 
 cd(Opefolder);

@@ -16,14 +16,14 @@ as_         = [];                          %Define globally shared variables
 %% Åò2-1-3-1-3-2 Timestamp, speed, longitudinal acceleration global variable declaration 
 %========= NOTE:  PLEASE BE SURE TO KEEP THE VARIABLES IN THIS ORDER =========
 %AnsiString var names                                            % colval   % variable name
-as_{1}    = 'time(s)';                                           %   1      % timestamp
-as_{2}    = 'speed(km/s)';                                       %   2      % Ego vehicle velocity
-as_{3}    = 'long_g(m/s^2)';                                     %   3      % Ego vehicle acceleration x
+as_{1}    = 't';                                                 %   1      % timestamp
+as_{2}    = 'CAN1__WheelData_Veh_V_ActlBrk';                     %   2      % Ego vehicle velocity
+as_{3}    = 'CAN1__YAW_Rate_Brake_Control_1_VehLong_A_Actl';     %   3      % Ego vehicle acceleration x
 as_{4}    = 'CAN1_ECU_data_2_TopPriorityObjectID';               %   4      % Top Priority Object
 as_{5}    = 'CAN1__BSM_Information_BSM_Warn_L';                  %   5      % BSM Warning Left
 as_{6}    = 'CAN1__BSM_Information_BSM_Warn_R';                  %   6      % BSM Warning Right
 as_{7}    = 'CAN1__EngControlData_BrkOnOffSwtch_D_Actl';         %   7      % Ego braking switch
-as_{8}    = 'acc_ped(0-1)';                                      %   8      % Ego apo
+as_{8}    = 'CAN1__EngVehicleSpThrottle_ApedPos_Pc_ActlArb';     %   8      % Ego apo
 as_{9}    = 'CAN1__LANE_Info2_LaneCurvature_EST';                %   9      % Lane curvature
 as_{10}   = 'CAN1__LANE_Info_Lane_LatDist';                      %   10     % Lane lateral distance
 as_{11}   = 'CAN1__LANE_Info_Lane_Width';                        %   11     % Lane width

@@ -84,9 +84,9 @@ catch
 end
 
 %% ˜2-1-3-1-2-5-1 Determine number of microtrips (Exclude SHRP2, as this is done in 'cm2_2_fsetvar_shrp2') (GLOBAL)
-[num_mt, mt_start, mt_end] = f_cm2_2_calc_mountain(vsp, vsp_thresh, flg_mtn, var_time, flg_analysis_mode);  % Find total number of mountains
+[num_mt, mt_start, mt_end] = f_cm2_2_calc_mountain(var_ego_vel_nan, 0.1, flg_mtn, var_time, flg_analysis_mode);  % Find total number of mountains
 %% ˜2-1-3-1-2-5-2 Set variables in "M_data" (no values inserted yet)
-M_data = f_set_fieldnames(num_mt);                                                            % Declare M_data matrix 
+M_data = f_cm2_2_set_fieldnames(num_mt);                                                            % Declare M_data matrix 
 
 %% ˜2-1-3-1-2-6  Fill in Values for "M_data"
 for i_mt = 1:num_mt
@@ -169,9 +169,15 @@ for i_mt = 1:num_mt
         try
             var_trackN_ILV          = getfield(var_,as_{asn_ctr+i_asn(7)})+1;        % Nth track is lead vehicle
         catch
-            var_trackN_ILV = NaN(size(var_time));
+            var_trackN_ILV((getfield(var_,as_{i_asn(4)})+1)~=i_tc,1) = 2;            % Dummy
+            var_trackN_ILV((getfield(var_,as_{i_asn(4)})+1)==i_tc,1) = 1;            % Assign all values equal to i_tc as one
+            var_trackN_ILV((getfield(var_,as_{i_asn(4)})+1)~=i_tc,1) = 0;
+            
+            var_trackN_ILV(var_trackN_posx > 327,1) = 0;
             if i_tc == 1
-                M_var_trackN_all_ones = zeros(size(var_time));
+                M_var_trackN_all_ones = var_trackN_ILV;
+            else
+                M_var_trackN_all_ones   =  M_var_trackN_all_ones + var_trackN_ILV;
             end
         end
         try
