@@ -14,20 +14,21 @@ function [k d_timer d_time RFL] = f_am1_calc_riskcount(var_time, RFT, M_data, i_
     RFL = (alpha_thw*plotvar_1) + (beta_ttc*plotvar_2); % Risk Feeling
 
     % Initialize working varaibles
-    flg     = [];  % Risk Feeling Flag
-    d_rf    = [];  % Matrix to store risk feeling
     d_timer = [];  % Matrix to store timer values
     d_time  = [];  % Matrix to store time
     timer   = 0;   % Timer to count values when RF is greater than treshold
     k       = 0;   % Counter to count RF(i) > RFT
     timer_0 = 0;   % Previous timer value
     i0      = 0;   % Store previous index for sanity check
-    
-    if min(isnan(RFL)) == 1
-        flg = zeros(size(RFL));
-        return
-    end
-    
+    %Initialize
+    flg     = zeros(size(RFL)); 
+    d_rf    = zeros(size(RFL));
+
+%     if min(isnan(RFL)) == 1
+%         flg = zeros(size(RFL));
+%         return
+%     end
+
     %% ˜3-1-2-2 Calculate timer value when RF > RF_THRESH
     for i = 1:length(var_time)
         if isempty(RFL) == 1
